@@ -50,6 +50,13 @@ Garage github page at http://exosite-garage.github.com<br>
 Release Info
 ========================================
 ----------------------------------------
+Release 2012-01-13<br>
+----------------------------------------
+--) increased array size for read routine<br>
+--) fixed array overwrite in read routine<br>
+--) removed un-initialized serial port messages<br>
+
+----------------------------------------
 Release 2011-10-21<br>
 ----------------------------------------
 --) initial version<br>
