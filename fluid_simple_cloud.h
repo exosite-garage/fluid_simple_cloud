@@ -36,8 +36,6 @@ void sendToExosite(int res, int value) {
       // Read from the nic or the IC buffer overflows with no warning and goes out to lunch
       while (client.available()) {
         char c = client.read();
-        Serial.println(".");
-        Serial.print(c);
       }
       client.stop();
     }
@@ -46,7 +44,7 @@ void sendToExosite(int res, int value) {
 
 int readFromExosite(String res ,String* pResult) {
   int ret = 0;
-  char rxdata[100];
+  char rxdata[150];
   int stringPos = 0;
   boolean DataRecieved = false;
   boolean RxLoop = true;
@@ -84,13 +82,10 @@ int readFromExosite(String res ,String* pResult) {
           rxdata[stringPos] = c;
           stringPos += 1;
         } else {
+          rxdata[stringPos] = 0;
           if (DataRecieved) {
             DataRecieved = false;
             RxLoop = false;
-            //set blank 
-            for(int i = stringPos; i<100; i++)
-              rxdata[i] = 0;
-            Serial.println(rxdata);
             String rxstrg = String(rxdata);
             int length = 0;
             int rxresultpos = 0;
