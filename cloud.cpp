@@ -32,15 +32,11 @@
 
 byte mac[] = { "PUTYOURMACHERE"  }; // <-- Fill in your MAC here! (e.g. {0x90, 0xA2, 0xDA, 0x00, 0x22, 0x33}) 
 
-/*
- * Global variabele
- */
+
+// Global variabele
   char serverName[] = "m2.exosite.com";
-
   EthernetClient client; // Port 80 is default for HTTP
-
   static char enetInitDone = 0;
-
   char rxdata[150];
   String myDataString;
   int ret;
@@ -52,9 +48,11 @@ byte mac[] = { "PUTYOURMACHERE"  }; // <-- Fill in your MAC here! (e.g. {0x90, 0
   unsigned long time_now;
   unsigned long timeout; 
 
-/*
- * Send data to cloud
- */
+/*==============================================================================
+* sendToExosite
+*
+* Send data to cloud
+*=============================================================================*/
 int sendToExosite(String res, int value)
 {
   ret = 0;
@@ -121,10 +119,13 @@ int sendToExosite(String res, int value)
   return ret;
 }
 
-/*
- * Read data from cloud
- */
-int readFromExosite(String res ,String* pResult) {
+/*==============================================================================
+* readFromExosite
+*
+* Read data from cloud
+*=============================================================================*/
+int readFromExosite(String res ,String* pResult)
+{
 
   ret = 0;
   stringPos = 0;
