@@ -26,7 +26,22 @@
 //*****************************************************************************
 #include <SPI.h>
 #include <Ethernet.h>
-#include "cloud.h"
+#include <Exosite.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+// Fill in your MAC address and CIK 
+byte macData[] = { 0x90, 0xA2, 0xDA, 0x00, 0x11, 0x22}; // <-- Fill in your MAC here! (You can find it on the bottom of Ethernet Shield)
+
+String cikData = "PUTYOURCIKHERE";      // <-- Fill in your CIK here! (https://portals.exosite.com -> Add Device)
+
+// local Macros
+#define ONE_WIRE_BUS 6
+
+// global
+Exosite exosite(&Ethernet, macData, cikData);
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
 
 /*==============================================================================
 * setup
@@ -35,6 +50,7 @@
 *=============================================================================*/
 void setup() 
 {
+  exosite.init();
   pinMode(9, OUTPUT);  //set GPIO 9 to an output
 }
 
@@ -48,11 +64,15 @@ void loop()
   String retVal;
 
   //Send an analog input value to Exosite, use the alias (resource name) "1"
-  sendToExosite("1",analogRead(A0));
+  exosite.sendToCloud("1", analogRead(A0));
+
+  //Read temperature from the Dallas sensor and send the data to the Exosite. use the alias "temp"
+  sensors.requestTemperatures();
+  exosite.sendToCloud("temp", sensors.getTempCByIndex(0));
 
   //Read the alias (resource name) "onoff" and set our GPIO based on its value
-  if (readFromExosite("onoff", &retVal))
+  if (exosite.readFromCloud("onoff", &retVal))
     digitalWrite(9, retVal.toInt());
 
-    delay(3000);
+  delay(3000);
 }
