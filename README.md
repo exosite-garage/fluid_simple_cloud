@@ -47,7 +47,7 @@ Quick Start
 
 9) Copy the OneWire library folder "OneWire" to the directory sketchbook-location\"libraries". You should then see "File->Examples->OneWire"
 
-10) Copy the Dallas Temperature Control library folder "dallas-temperature-control" to the directory sketchbook-location\"libraries". You should then see "File->Examples->dallas-temperature-control"
+10) Copy the Dallas Temperature Control library folder "dallas-temperature-control" to the directory sketchbook-location\"libraries" and rename it to "dallas_temperature_control". You should then see "File->Examples->dallas-temperature-control"
 
 11) Run the Arduino IDE. Open the "fluid_simple_cloud.ino" file from the Arduino software.
 
